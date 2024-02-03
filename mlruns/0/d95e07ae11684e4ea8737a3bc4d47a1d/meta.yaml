@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/d95e07ae11684e4ea8737a3bc4d47a1d/artifacts
+end_time: 1706965339199
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d95e07ae11684e4ea8737a3bc4d47a1d
+run_name: 1_experiment
+run_uuid: d95e07ae11684e4ea8737a3bc4d47a1d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1706965335476
+status: 3
+tags: []
+user_id: Timur
