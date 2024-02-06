@@ -85,14 +85,14 @@ from typing import List
 from pydantic import BaseModel
 
 class Predict_from_pydentic(BaseModel):
-    gender: List
-    age: List
-    hypertension: List
-    heart_disease: List
-    bmi: List
-    smoking_history: List
-    HbA1c_level: List
-    blood_glucose_level: List
+    gender: List[str]
+    age: List[float]
+    hypertension: List[int]
+    heart_disease: List[int]
+    bmi: List[float]
+    smoking_history: List[str]
+    HbA1c_level: List[float]
+    blood_glucose_level: List[int]
 
 
 
@@ -112,7 +112,7 @@ async def predict(file: UploadFile = File(...)):
 
 @app.post("/predict_list")
 async def predict(data: Predict_from_pydentic):
-    df=pd.read_csv(io.StringIO(data.dict()))
+    df=pd.DataFrame(data.dict())
     print(df.columns)
     predict_model=model.predict(df)
     print(type(predict_model))
