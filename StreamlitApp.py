@@ -167,18 +167,35 @@ from imblearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 
 
-st.title('Diabetes Prediction App')
-#%%
-data = pd.read_csv('diabetes_prediction_dataset.csv')
-#%%
-#write a function to predict diabetes
-def predict_diabetes(Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age):
-    #load the model
-    model = load('diabetes_prediction_model.joblib')
-    #make a prediction
-    prediction = model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-    return prediction
-# write a print for prediction
-st.write('Please input the following information to predict diabetes', data)
+import streamlit as st
+import pandas as pd
+from joblib import load
 
-st.write('The likelihood of having diabetes is:', predict_diabetes)
+# Load the trained model
+model = load('bestmodel.joblib')
+
+# Create a Streamlit application
+st.title('Diabetes Prediction App')
+
+# Create a form to input the necessary features
+with st.form(key='my_form'):
+    st.write('Please input the following information:')
+    Smoking_history = st.number_input(label='smoking_history', min_value=0)
+    HbA1c_level = st.number_input(label='HbA1c_level', min_value=0)
+    Gender = st.number_input(label='gender', min_value=0)
+    Hypertension = st.number_input(label='hypertension', min_value=0)
+    Blood_glucose_level = st.number_input(label='blood_glucose_level', min_value=0)
+    BMI = st.number_input(label='bmi', min_value=0.0)
+    Heart_disease = st.number_input(label='heart_disease', min_value=0)
+    DiabetesPedigreeFunction = st.number_input(label='DiabetesPedigreeFunction', min_value=0.0)
+    Age = st.number_input(label='age', min_value=0)
+    submit_button = st.form_submit_button(label='Predict')
+
+# Use the model to make a prediction based on the input features
+if submit_button:
+    input_data = pd.DataFrame([[Smoking_history, HbA1c_level, Gender, Hypertension, Blood_glucose_level, BMI, Heart_disease, DiabetesPedigreeFunction, Age]],
+                              columns=['smoking_history', 'HbA1c_level', 'gender', 'hypertension', 'blood_glucose_level', 'bmi', 'DiabetesPedigreeFunction', 'age', 'heart_disease'])
+    prediction = model.predict(input_data)
+
+    # Display the prediction on the Streamlit application
+    st.write('The likelihood of having diabetes is:', prediction[0])
