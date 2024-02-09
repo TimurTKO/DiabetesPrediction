@@ -180,7 +180,7 @@ st.title('Diabetes Prediction App')
 # Create a form to input the necessary features
 with st.form(key='my_form'):
     st.write('Please input the following information:')
-    Smoking_history = st.number_input(label='smoking_history', min_value=0)
+    data = st.number_input(label='smoking_history', min_value=0)
     HbA1c_level = st.number_input(label='HbA1c_level', min_value=0)
     Gender = st.number_input(label='gender', min_value=0)
     Hypertension = st.number_input(label='hypertension', min_value=0)
