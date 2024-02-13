@@ -103,7 +103,7 @@ uploaded_file = st.file_uploader("Upload your dataset", type=['csv'])
 
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
-    st.write(data)
+    #st.write(data)
     predictions = predict_diabetes(data)
     st.write(predictions)
 
